@@ -1,6 +1,7 @@
 body{
   padding-left: 50px;
   padding-right: 50px;
+  background: linear-gradient(#733E32, #D99066);
   }
 .header{
   background-color: black;
@@ -18,7 +19,4 @@ body{
   background-position: 50% 60%;
   font-size: 100%;
   text-shadow: 0 0 5px white;
-}
-.bg{
-  background-color: #D99066;
 }
