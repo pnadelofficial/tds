@@ -18,5 +18,8 @@ body{
   padding-right: 50px;
   background-position: 50% 60%;
   font-size: 100%;
-  text-shadow: 0 0 5px white;
+  text-shadow: 0 0 7px white;
+}
+.bg{
+  background-color: white;
 }
