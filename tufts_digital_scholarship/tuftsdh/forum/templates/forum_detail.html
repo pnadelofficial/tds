@@ -19,7 +19,87 @@
     <link rel="stylesheet" type="text/css" href="{% static 'codemirror.css' %}">
 </head>
 <body>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <div class="bg">
+        <div class="landscape" style='background-image: url("{{image}}");'>
+            <div class="title" style="text-align:right; padding-top: 100px;">
+                <small>
+                    <h1>{{ post.title }}</h1>
+                    {{ post.created_on.date }} |&nbsp;
+                    Categories:&nbsp;
+                    {% for category in post.categories.all %}
+                    <a href="{% url 'forum_category' category.name %}">
+                        {{ category.name }}
+                    </a>&nbsp;
+                    {% endfor %}
+                </small>
+            </div>
+        </div>
+        <div class="col-md-8 offset-md-2">
+            <p>{{ post.body| safe | linebreaks }}</p>
+            {% if post.project_file %}
+                {% for i,j in data.items %}
+                    {% if i == 'cells' %}
+                        {% for k in j %}
+                            {% if k.cell_type == 'markdown' %}
+                                {% for e in k.source %}
+                                    {{ e|markdownify }}
+                                {% endfor %}
+                            {% else %}
+                                <pre data-executable>{{ k.source|join:'' }}</pre>
+                                <details open>
+                                    <summary>Original outputs</summary>
+                                    <!-- PREBAKE OUTPUTS -->
+                                    <br>
+                                    {% if 'name' in k.outputs.0.keys %}
+                                        {{k.outputs.0.text.0}}
+                                    {% elif k.outputs.0.output_type == 'execute_result' %}
+                                        {% for l,m in k.outputs.0.data.items %}
+                                            {% if l == 'text/html' %}
+                                                {% autoescape off %}
+                                                    {{m|join:''}}
+                                                {% endautoescape %}
+                                            {% elif l == 'text/plain' and k.outputs.0.data.keys|length < 2 %}
+                                                {{m.0}}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% elif k.outputs.0.output_type == 'display_data' %}
+                                        {% for l,m in k.outputs.0.data.items %}
+                                            {% if l == 'image/png' %}
+                                                <img src="data:image/png;base64, {{m}}" alt="nb_image">
+                                            {% else %}
+                                                <small>{{m}}</small>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </details> 
+                            {% endif %}
+                            <hr>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <h3>Leave a comment:</h3>
+            <form action="/forum/{{ post.pk }}/" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.author }}
+                </div>
+                <div class="form-group">
+                    {{ form.body }}
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <h3>Comments:</h3>
+            {% for comment in comments %}
+            <p>
+                On {{comment.created_on.date }}&nbsp;
+                <b>{{ comment.author }}</b> wrote:
+            </p>
+            <p>{{ comment.body }}</p>
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
     <div class="landscape" style='background-image: url("{{image}}");'>
         <div class="title" style="text-align:right; padding-top: 100px;">
             <small>
@@ -100,6 +180,7 @@
         {% endfor %}
     </div>
     <script src="{% static 'juniper.min.js' %}"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script>
         new Juniper({
             repo: 'ines/spacy-io-binder',
