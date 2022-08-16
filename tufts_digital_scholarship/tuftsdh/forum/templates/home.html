@@ -15,34 +15,36 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
-    <br>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for post in posts %}
-        <div class="col">
-          <div class="card h-100">
-            {% if post.project_image %}
-                <img src="{{ post.project_image.url }}" class="card-img-top" alt="{{ post.project_image }}">
-                <div class="card-body">
-                <h5 class="card-title">{{ post.title }}</h5>
-                <p class="card-text">{{ post.body|safe|slice:":400" }}...</p>
-                <a href="{% url 'forum_detail' post.pk%}" class="btn btn-primary">See More</a>
-                </div>
-                <div class="card-footer">
-                <small class="text-muted">{{ post.last_modified }}</small>
-                </div>
-            {% else %}
-                <div class="card-body">
-                <h5 class="card-title">{{ post.title }}</h5>
-                <p class="card-text">{{ post.body | slice:":400" }}...</p>
-                <a href="{% url 'forum_detail' post.pk%}" class="btn btn-primary">See More</a>
-                </div>
-                <div class="card-footer">
-                <small class="text-muted">{{ post.last_modified }}</small>
-                </div>
-            {% endif %}
-          </div>
+    <div class="bg">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for post in posts %}
+            <div class="col">
+              <div class="card h-100">
+                {% if post.project_image %}
+                    <img src="{{ post.project_image.url }}" class="card-img-top" alt="{{ post.project_image }}">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.body|safe|slice:":400" }}...</p>
+                    <a href="{% url 'forum_detail' post.pk%}" class="btn btn-primary">See More</a>
+                    </div>
+                    <div class="card-footer">
+                    <small class="text-muted">{{ post.last_modified }}</small>
+                    </div>
+                {% else %}
+                    <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.body | slice:":400" }}...</p>
+                    <a href="{% url 'forum_detail' post.pk%}" class="btn btn-primary">See More</a>
+                    </div>
+                    <div class="card-footer">
+                    <small class="text-muted">{{ post.last_modified }}</small>
+                    </div>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
+    <br>
 </body>
 </html>
