@@ -23,3 +23,23 @@ body{
 .bg{
   background-color: white;
 }
+
+.mystyle {
+  font-size: 11pt; 
+  font-family: Arial;
+  border-collapse: collapse; 
+  border: 1px solid silver;
+
+}
+td, th {
+  padding: 5px;
+}
+
+tr:nth-child(even) {
+  background: #E0E0E0;
+}
+
+tr:hover {
+  background: silver;
+  cursor: pointer;
+}
