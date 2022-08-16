@@ -51,15 +51,18 @@
                                     <!-- PREBAKE OUTPUTS -->
                                     <br>
                                     {% if 'name' in k.outputs.0.keys %}
-                                        {{k.outputs.0.text.0}}
+                                        {% autoescape off %}
+                                            {{k.outputs.0.text|join:''|linebreaks}}
+                                        {% endautoescape %}    
                                     {% elif k.outputs.0.output_type == 'execute_result' %}
                                         {% for l,m in k.outputs.0.data.items %}
                                             {% if l == 'text/html' %}
                                                 {% autoescape off %}
                                                     {{m|join:''}}
                                                 {% endautoescape %}
-                                            {% elif l == 'text/plain' and k.outputs.0.data.keys|length < 2 %}
-                                                {{m.0}}
+                                                <!-- and k.outputs.0.data.keys|length < 3 -->
+                                            {% elif l == 'text/plain' %}
+                                                {{m}}
                                             {% endif %}
                                         {% endfor %}
                                     {% elif k.outputs.0.output_type == 'display_data' %}
