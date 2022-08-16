@@ -1,0 +1,21 @@
+body{
+  padding-left: 50px;
+  padding-right: 50px;
+  }
+.header{
+  background-color: black;
+  padding: 50px;
+  background-image: url("pompeii-frescoes-house-of-the-mysteries-wall-ft-3.jpg");
+  background-size:     cover;                      /* <------ */
+  background-repeat:   no-repeat;
+  background-position: 50% 40%;
+}
+.landscape{
+  height: 300px;
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-position: 50% 60%;
+  font-size: 100%;
+  text-shadow: 0 0 5px white;
+}

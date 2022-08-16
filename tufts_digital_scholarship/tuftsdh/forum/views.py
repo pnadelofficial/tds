@@ -5,7 +5,7 @@ import json
 # Create your views here.
 def home_view(request):
     posts = Post.objects.all().order_by('-created_on')
-    
+
     context = {
         "posts": posts,
     }
@@ -32,9 +32,10 @@ def forum_category(request, category):
 
 def forum_detail(request, pk):
     post = Post.objects.get(pk=pk)
-    f = open(f'.{post.project_file.url}')
+    f = open(f'/home/tuftsdh/tds/tufts_digital_scholarship/tuftsdh{post.project_file.url}')
+    # f = open(post.project_file.url)
     data = json.load(f)
-    
+
     image = post.project_image.url
 
     form = CommentForm()
