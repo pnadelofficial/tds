@@ -32,15 +32,15 @@ body{
 
 }
 
-.mystyle td, th {
+td, th {
   padding: 5px;
 }
 
-.mystyle tr:nth-child(even) {
+tr:nth-child(even) {
   background: #E0E0E0;
 }
 
-.mystyle tr:hover {
+tr:hover {
   background: silver;
   cursor: pointer;
 }
