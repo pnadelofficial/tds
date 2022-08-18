@@ -37,11 +37,11 @@ td, th {
 }
 
 tr:nth-child(even) {
-  background: #E0E0E0;
+  background: #52627b;
 }
 
 tr:hover {
-  background: silver;
+  background: #9aa9c0;
   cursor: pointer;
 }
 
