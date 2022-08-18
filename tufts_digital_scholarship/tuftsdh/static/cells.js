@@ -1,4 +1,4 @@
 new Juniper({
-    repo: 'pnadelofficial/example_notebooks',
+    repo: 'ines/spacy-io-binder',
     isolateCells: false
 });
