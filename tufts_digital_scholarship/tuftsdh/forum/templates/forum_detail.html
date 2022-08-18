@@ -60,7 +60,6 @@
                                                 {% autoescape off %}
                                                     {{m|join:''}}
                                                 {% endautoescape %}
-                                                <!-- and k.outputs.0.data.keys|length < 3 -->
                                             {% elif l == 'text/plain' %}
                                                 {{m}}
                                             {% endif %}
@@ -69,6 +68,10 @@
                                         {% for l,m in k.outputs.0.data.items %}
                                             {% if l == 'image/png' %}
                                                 <img src="data:image/png;base64, {{m}}" alt="nb_image">
+                                            {% elif l == 'text/html' %}
+                                                {% autoescape off %}
+                                                    {{m|join:''}}
+                                                {% endautoescape %}
                                             {% else %}
                                                 <small>{{m}}</small>
                                             {% endif %}
